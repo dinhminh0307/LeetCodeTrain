@@ -31,3 +31,33 @@ int main(void)
         cout <<"Has duplicate";
     } 
 }
+
+// CPP program to illustrate the 
+// unordered_set::begin() function 
+
+// #include <iostream> 
+// #include <bits/stdc++.h>
+
+// using namespace std; 
+
+// int main() 
+// { 
+
+// 	unordered_set<int> sampleSet; 
+
+// 	// Inserting elements in the std 
+// 	sampleSet.insert(5); 
+// 	sampleSet.insert(10); 
+// 	sampleSet.insert(15); 
+// 	sampleSet.insert(20); 
+// 	sampleSet.insert(25); 
+
+// 	auto itr1 = sampleSet.begin(); 
+// 	auto itr2 = sampleSet.begin(1); 
+
+// 	cout << "First element in the container is: " << *itr1; 
+// 	cout << "\nFirst element in the bucket 4 is: " << *itr2; 
+
+// 	return 0; 
+// } 
+
