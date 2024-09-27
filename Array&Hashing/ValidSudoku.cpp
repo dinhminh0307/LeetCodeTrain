@@ -50,7 +50,7 @@ public:
             {
                 if(board[i][j] == '.') continue;
 
-                if(map[(i /3) * 3 + j/3].count(board[i][j]))
+                if(map[(i /3) * 3 + j/3].count(board[i][j])) // divided the sub table into a cell 3x3, each coordinate is col/3 and row/3
                 {
                     return false;
                 } else {
