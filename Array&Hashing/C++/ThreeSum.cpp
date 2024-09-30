@@ -28,9 +28,9 @@ class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         unordered_set<string> s;
-        unordered_map<int, int> new_nums;
+        map<int, int> new_nums;
         vector<vector<int>> result;
-        
+        sort(nums.begin(), nums.end());
 
         int idx = 0;
         for(auto& n : nums)
@@ -39,72 +39,93 @@ public:
             idx++;
         }
 
-        auto it = new_nums.begin();
-        auto tmp = it;
-        /*Logic: it will start from 0 and tmp will run till end of the list without no interupt it
-        if tmp run over the list, increment the it and tmp will start over again except it position
-        it will be assign to c, tmp assign to b. so just need to find a*/
-        while (it != new_nums.end()) {
-            int a, b, c;
+        // auto be = new_nums.begin();
+        // for(int i = 0; i < new_nums.size(); i++)
+        // {
+        //     cout << be->second << endl;
+        //     be++;
+        // }
 
-            if (tmp == new_nums.end()) {
-                // Reset tmp to the beginning when reaching the end of the list
-                tmp = new_nums.begin();
-                it++;  // Move 'it' to the next element
+        auto it = new_nums.begin();
+        auto tmp = new_nums.rbegin(); // start from end
+        auto sum = new_nums.begin();
+
+        /*Logic: 2 pointers techinique*/
+        bool isFound = false;
+        while(true)
+        {
+            
+            if(sum == it)
+            {
+                it++;
                 continue;
             }
 
-            if (it == new_nums.end()) {
-                // Exit the loop if 'it' has reached the end
-                break;
-            }
-
-            // Make sure 'tmp' is not equal to 'it'
-            if (tmp == it) {
+            if(tmp->first == sum->first)
+            {
                 tmp++;
                 continue;
             }
 
-            // Extract values from the iterators
-            c = it->second;
-            b = tmp->second;
-            a = 0 - b - c;
+            // if(tmp->first == it->first)
+            // {
+            //     tmp++;
+            //     it++;
+            //     cout << "new: " << tmp->second << " " << it->second << endl; 
+            //     continue;
+            // }
 
-            unordered_set<int> seen;
-            for (auto& f : new_nums) {
-                if (f.first != it->first && f.first != tmp->first) {
-                    if (seen.find(a) != seen.end()) {
-                        // If we find a valid triplet (a, b, c), process it
-                        vector<int> res = {a, b, c};
-
-                        // Sort the triplet for uniqueness
-                        sort(res.begin(), res.end());
-
-                        // Create a string from the triplet to store in the set
-                        string tmp_str;
-                        for (size_t i = 0; i < res.size(); ++i) {
-                            tmp_str += to_string(res[i]);
-                            if (i != res.size() - 1) {
-                                tmp_str += '#';  // Add delimiter between numbers
-                            }
-                        }
-
-                        // Insert the triplet string into the set if it hasn't been added already
-                        if (s.find(tmp_str) == s.end()) {
-                            s.insert(tmp_str);
-                        }
-
-                        break;  // Break after finding a valid triplet
-                    }
-                    seen.insert(f.second);  // Add current element to the set for later comparisons
+            int some = it->second + tmp->second;
+            cout << it->second << " " << tmp->second<< " " << -sum->second << " " << some << endl;
+            if(some < -sum->second)
+            {
+                if(it == new_nums.end())
+                {
+                    it = new_nums.begin();
+                    tmp = new_nums.rbegin();
+                    sum++;
+                    continue;
                 }
+                it++;
+                continue;
+            } else if(some > -sum->second) {
+                if(tmp == new_nums.rend())
+                {
+                    it = new_nums.begin();
+                    tmp = new_nums.rbegin();
+                    sum++;
+                    continue;
+                }
+                tmp++;
+                continue;
+            } else if(some == -sum->second) {
+                vector<int> res = {it->second, tmp->second, sum->second};
+                sort(res.begin(), res.end());
+                cout << "ok" << endl;
+                string tmp_str;
+                for (size_t i = 0; i < res.size(); ++i) {
+                    tmp_str += to_string(res[i]);
+                    if (i != res.size() - 1) {
+                        tmp_str += '#';  // Add delimiter between numbers
+                    }
+                }
+
+                // Insert the triplet string into the set if it hasn't been added already
+                if (s.find(tmp_str) == s.end()) {
+                    s.insert(tmp_str);
+                    it = new_nums.begin();
+                    tmp = new_nums.rbegin();
+                    sum++;
+                } else {
+                    it++;
+                    tmp++;
+                }
+                
             }
 
-            // Increment the tmp iterator and check for the end
-            tmp++;
-            if (tmp == new_nums.end()) {
-                it++;
-                tmp = new_nums.begin();
+            // Break condition to prevent infinite loops
+            if (it == new_nums.end() && tmp == new_nums.rend()) {
+                break;
             }
         }
 
@@ -129,7 +150,7 @@ public:
 int main(void)
 {
     Solution sol;
-    vector<int> test = {-1,0,1,2,-1,-4,-2,-3,3,0,4};
+    vector<int> test = {-1,0,1,2,-1,-4};
     vector<vector<int>> result = sol.threeSum(test);
     for(auto& it : result)
     {
