@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/largest-rectangle-in-histogram/
+
 from typing import List
 #Solution: 
 #1. use stack to keep track to store the current height and the storing index
