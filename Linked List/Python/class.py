@@ -1,53 +1,51 @@
-# Init class in pthon
-
 class Node:
-    def __init__(self, val) -> None:
-        self.val = val
+    def __init__(self, value) -> None:
+        self.value = value
         self.next = None
 
 class LinkedList:
-    def __init__(self, val) -> None:
-        new_node = Node(val)
+    def __init__(self, value) -> None:
+        new_node = Node(value)
         self.head = new_node
         self.tail = new_node
-        self.len = 1
+        self.length = 1
     
-    def insertAtBeginning(self, val) -> None:
-        new_node = Node(val)
-        if self.len == 0:
-            self.__init__(val)
+    def insertAtBeginning(self, value) -> None:
+        new_node = Node(value)
+        if self.length == 0:
+            self.__init__(value)
             return
         new_node.next = self.head
         self.head = new_node
-        self.len += 1
+        self.length += 1
         
     
-    def insertAtEnd(self, val) -> None:
-        new_node = Node(val)
-        if self.len == 0:
-            self.__init__(val)
+    def insertAtEnd(self, value) -> None:
+        new_node = Node(value)
+        if self.length == 0:
+            self.__init__(value)
             return
         temp = self.head
         while temp.next:
             temp = temp.next
         temp.next = new_node
         new_node.next = None
-        self.len += 1
+        self.length += 1
     
-    def insert(self, val, position) -> None:
+    def insert(self, value, position) -> None:
         if position < 1:
             return
-        new_node = Node(val)
-        if self.len == 0:
-            self.__init__(val)
+        new_node = Node(value)
+        if self.length == 0:
+            self.__init__(value)
             return
         
         if position == 1:
-            self.insertAtBeginning(val)
+            self.insertAtBeginning(value)
             return
         
-        if position >= self.len + 1:
-            self.insertAtEnd(val)
+        if position >= self.length + 1:
+            self.insertAtEnd(value)
             return
         
         temp = self.head
@@ -58,5 +56,4 @@ class LinkedList:
             return
         new_node.next = temp.next
         temp.next = new_node
-        self.len += 1
-        
+        self.length += 1
