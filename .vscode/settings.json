@@ -26,6 +26,7 @@
         "list": "cpp",
         "vector": "cpp",
         "atomic": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "numbers": "cpp"
     }
 }
