@@ -8,25 +8,29 @@ class BST:
     def __init__(self) -> None:
        self.root = None
 
-    def insert(self, val) ->None:
+    def insert(self, val) ->bool:
         new_node = Node(val)
         if self.root == None:
             self.root = new_node
-            return
+            return True
         temp = self.root
         while True:
             if new_node.value == temp.value:
                 return False
-            if new_node.value < temp.value and temp.left == None:
-                temp.left = new_node
-                break
-            elif new_node.value > temp.value and temp.right == None:
-                temp.right = new_node
-                break
             if new_node.value < temp.value:
-                temp = temp.left
+                if temp.left == None:
+                    temp.left = new_node
+                    break
+                else:
+                    temp = temp.left
+                
             elif new_node.value > temp.value:
-                temp = temp.right
+                if temp.right == None:
+                    temp.right = new_node
+                    break
+                else:
+                    temp = temp.right
+        return True
 
     def contain(self, val) ->bool:
         if self.root == None:
