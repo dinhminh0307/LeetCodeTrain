@@ -96,8 +96,60 @@ class DoublyLinkedList:
         else:
             return False
         return True
+    
+    def insert(self, index, value) -> bool:
+        # Insert at head if index is 0
+        if index == 0:
+            return self.prepend(value)
+        # Insert at tail if index is equal to length
+        if index == self.length:
+            return self.append(value)
+        # Return False if index is out of bounds
+        if index < 0 or index > self.length:
+            return False
 
-        
+        # Navigate to the position where we want to insert
+        new_node = Node(value)
+        temp = self.get(index - 1)  # Get the node just before the insertion point
+        if temp is None:
+            return False
+
+        # Insert the new node between `temp` and `temp.next`
+        new_node.next = temp.next
+        new_node.prev = temp
+        temp.next.prev = new_node
+        temp.next = new_node
+
+        self.length += 1
+        return True
+
+     
+    def remove(self, index) -> bool:
+        # Remove at head if index is 0
+        if index == 0:
+            return self.pop_first()
+        # Remove at tail if index is length - 1
+        if index == self.length - 1:
+            return self.pop()
+        # Return False if index is out of bounds
+        if index < 0 or index >= self.length:
+            return False
+
+        # Navigate to the node to be removed
+        temp = self.get(index)
+        if temp is None:
+            return False
+
+        # Update the neighboring nodes to bypass `temp`
+        temp.prev.next = temp.next
+        temp.next.prev = temp.prev
+
+        # Remove temp by setting its pointers to None
+        temp.next = None
+        temp.prev = None
+
+        self.length -= 1
+        return True   
 
 # Create a DoublyLinkedList instance
 # dll = DoublyLinkedList(1)
