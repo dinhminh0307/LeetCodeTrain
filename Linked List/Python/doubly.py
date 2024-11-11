@@ -73,6 +73,22 @@ class DoublyLinkedList:
         self.head = tmp
         self.length -= 1
         return True
+    
+    def get(self, index)-> Node:
+        if index < 0 :
+            return None
+        if self.head == None and self.tail == None:
+            return None
+        if self.length == 1:
+            return self.head
+        tmp = self.head
+
+        for i in range(index):
+            tmp = tmp.next
+            if tmp == None:
+                return None
+        return tmp
+
         
 
 # Create a DoublyLinkedList instance
@@ -159,6 +175,7 @@ class DoublyLinkedList:
 # print("Tail:", dll.tail.value if dll.tail else None)
 
 # Initialize a new list
+# Initialize a new list
 dll = DoublyLinkedList(10)
 dll.append(20)
 dll.append(30)
@@ -170,40 +187,30 @@ print("Length:", dll.length)
 print("Head:", dll.head.value if dll.head else None)
 print("Tail:", dll.tail.value if dll.tail else None)
 
-# Test pop_first on a list with multiple elements
-dll.pop_first()
-print("\nList after first pop_first (should remove 10):")
-dll.print_list()
-print("Length:", dll.length)
-print("Head:", dll.head.value if dll.head else None)
-print("Tail:", dll.tail.value if dll.tail else None)
+# Test get method with various indices
+print("\nTesting get method:")
 
-dll.pop_first()
-print("\nList after second pop_first (should remove 20):")
-dll.print_list()
-print("Length:", dll.length)
-print("Head:", dll.head.value if dll.head else None)
-print("Tail:", dll.tail.value if dll.tail else None)
+# Get element at index 0 (first element)
+node = dll.get(0)
+print("Element at index 0:", node.value if node else None)  # Expected: 10
 
-# Test pop_first on a list with one element
-dll.pop_first()
-print("\nList after third pop_first (should remove 30):")
-dll.print_list()
-print("Length:", dll.length)
-print("Head:", dll.head.value if dll.head else None)
-print("Tail:", dll.tail.value if dll.tail else None)
+# Get element at index 1
+node = dll.get(1)
+print("Element at index 1:", node.value if node else None)  # Expected: 20
 
-dll.pop_first()
-print("\nList after fourth pop_first (should make the list empty):")
-dll.print_list()
-print("Length:", dll.length)
-print("Head:", dll.head)
-print("Tail:", dll.tail)
+# Get element at index 2
+node = dll.get(2)
+print("Element at index 2:", node.value if node else None)  # Expected: 30
 
-# Test pop_first on an empty list
-result = dll.pop_first()
-print("\nAttempt to pop_first from an empty list:")
-print("Result of pop_first:", result)
-print("Length:", dll.length)
-print("Head:", dll.head)
-print("Tail:", dll.tail)
+# Get element at index 3 (last element)
+node = dll.get(3)
+print("Element at index 3:", node.value if node else None)  # Expected: 40
+
+# Get element at index out of bounds (e.g., 4)
+node = dll.get(4)
+print("Element at index 4 (out of bounds):", node.value if node else None)  # Expected: None
+
+# Get element at index -1 (negative index)
+node = dll.get(-1)
+print("Element at index -1 (negative index):", node.value if node else None)  # Expected: None
+
