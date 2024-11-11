@@ -60,86 +60,150 @@ class DoublyLinkedList:
             self.head = new_node
         self.length += 1
         return True
+    
+    def pop_first(self) -> bool:
+        if self.tail == None and self.head == None:
+            return False
+        if self.length == 1:
+            self.pop()
+            return True
+        tmp = self.head.next
+        tmp.prev = None
+        self.head.next = None
+        self.head = tmp
+        self.length -= 1
+        return True
+        
 
 # Create a DoublyLinkedList instance
-dll = DoublyLinkedList(1)
-print("Initial list after creating with one element:")
+# dll = DoublyLinkedList(1)
+# print("Initial list after creating with one element:")
+# dll.print_list()
+# print("Length:", dll.length)
+# print("Head:", dll.head.value if dll.head else None)
+# print("Tail:", dll.tail.value if dll.tail else None)
+
+# # Append elements to the list
+# dll.append(2)
+# dll.append(3)
+# dll.append(4)
+
+# print("\nList after appending 2, 3, and 4:")
+# dll.print_list()
+# print("Length:", dll.length)
+# print("Head:", dll.head.value if dll.head else None)
+# print("Tail:", dll.tail.value if dll.tail else None)
+
+# # Pop elements from the list
+# dll.pop()
+# print("\nList after first pop (should remove 4):")
+# dll.print_list()
+# print("Length:", dll.length)
+# print("Head:", dll.head.value if dll.head else None)
+# print("Tail:", dll.tail.value if dll.tail else None)
+
+# dll.pop()
+# print("\nList after second pop (should remove 3):")
+# dll.print_list()
+# print("Length:", dll.length)
+# print("Head:", dll.head.value if dll.head else None)
+# print("Tail:", dll.tail.value if dll.tail else None)
+
+# dll.pop()
+# print("\nList after third pop (should remove 2):")
+# dll.print_list()
+# print("Length:", dll.length)
+# print("Head:", dll.head.value if dll.head else None)
+# print("Tail:", dll.tail.value if dll.tail else None)
+
+# dll.pop()
+# print("\nList after fourth pop (should be empty):")
+# dll.print_list()
+# print("Length:", dll.length)
+# print("Head:", dll.head)
+# print("Tail:", dll.tail)
+
+# # Prepend elements to the list
+# dll.prepend(0)
+# print("\nList after prepending 0:")
+# dll.print_list()
+# print("Length:", dll.length)
+# print("Head:", dll.head.value if dll.head else None)
+# print("Tail:", dll.tail.value if dll.tail else None)
+
+# dll.prepend(-1)
+# print("\nList after prepending -1:")
+# dll.print_list()
+# print("Length:", dll.length)
+# print("Head:", dll.head.value if dll.head else None)
+# print("Tail:", dll.tail.value if dll.tail else None)
+
+# # Test prepend on an empty list
+# dll.pop()
+# dll.pop()
+# dll.pop()
+# dll.pop()  # Now the list should be empty
+
+# print("\nList after clearing all elements (should be empty):")
+# dll.print_list()
+# print("Length:", dll.length)
+# print("Head:", dll.head)
+# print("Tail:", dll.tail)
+
+# # Prepend to an empty list
+# dll.prepend(5)
+# print("\nList after prepending 5 to an empty list:")
+# dll.print_list()
+# print("Length:", dll.length)
+# print("Head:", dll.head.value if dll.head else None)
+# print("Tail:", dll.tail.value if dll.tail else None)
+
+# Initialize a new list
+dll = DoublyLinkedList(10)
+dll.append(20)
+dll.append(30)
+dll.append(40)
+
+print("Initial list:")
 dll.print_list()
 print("Length:", dll.length)
 print("Head:", dll.head.value if dll.head else None)
 print("Tail:", dll.tail.value if dll.tail else None)
 
-# Append elements to the list
-dll.append(2)
-dll.append(3)
-dll.append(4)
-
-print("\nList after appending 2, 3, and 4:")
+# Test pop_first on a list with multiple elements
+dll.pop_first()
+print("\nList after first pop_first (should remove 10):")
 dll.print_list()
 print("Length:", dll.length)
 print("Head:", dll.head.value if dll.head else None)
 print("Tail:", dll.tail.value if dll.tail else None)
 
-# Pop elements from the list
-dll.pop()
-print("\nList after first pop (should remove 4):")
+dll.pop_first()
+print("\nList after second pop_first (should remove 20):")
 dll.print_list()
 print("Length:", dll.length)
 print("Head:", dll.head.value if dll.head else None)
 print("Tail:", dll.tail.value if dll.tail else None)
 
-dll.pop()
-print("\nList after second pop (should remove 3):")
+# Test pop_first on a list with one element
+dll.pop_first()
+print("\nList after third pop_first (should remove 30):")
 dll.print_list()
 print("Length:", dll.length)
 print("Head:", dll.head.value if dll.head else None)
 print("Tail:", dll.tail.value if dll.tail else None)
 
-dll.pop()
-print("\nList after third pop (should remove 2):")
-dll.print_list()
-print("Length:", dll.length)
-print("Head:", dll.head.value if dll.head else None)
-print("Tail:", dll.tail.value if dll.tail else None)
-
-dll.pop()
-print("\nList after fourth pop (should be empty):")
+dll.pop_first()
+print("\nList after fourth pop_first (should make the list empty):")
 dll.print_list()
 print("Length:", dll.length)
 print("Head:", dll.head)
 print("Tail:", dll.tail)
 
-# Prepend elements to the list
-dll.prepend(0)
-print("\nList after prepending 0:")
-dll.print_list()
-print("Length:", dll.length)
-print("Head:", dll.head.value if dll.head else None)
-print("Tail:", dll.tail.value if dll.tail else None)
-
-dll.prepend(-1)
-print("\nList after prepending -1:")
-dll.print_list()
-print("Length:", dll.length)
-print("Head:", dll.head.value if dll.head else None)
-print("Tail:", dll.tail.value if dll.tail else None)
-
-# Test prepend on an empty list
-dll.pop()
-dll.pop()
-dll.pop()
-dll.pop()  # Now the list should be empty
-
-print("\nList after clearing all elements (should be empty):")
-dll.print_list()
+# Test pop_first on an empty list
+result = dll.pop_first()
+print("\nAttempt to pop_first from an empty list:")
+print("Result of pop_first:", result)
 print("Length:", dll.length)
 print("Head:", dll.head)
 print("Tail:", dll.tail)
-
-# Prepend to an empty list
-dll.prepend(5)
-print("\nList after prepending 5 to an empty list:")
-dll.print_list()
-print("Length:", dll.length)
-print("Head:", dll.head.value if dll.head else None)
-print("Tail:", dll.tail.value if dll.tail else None)
