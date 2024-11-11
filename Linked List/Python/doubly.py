@@ -48,6 +48,18 @@ class DoublyLinkedList:
             self.tail = None
         self.length -= 1
         return True
+    
+    def prepend(self, val) -> bool:
+        new_node = Node(val)
+        if self.head == None and self.tail == None:
+            self.append(val)
+            return True
+        else:
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+        self.length += 1
+        return True
 
 # Create a DoublyLinkedList instance
 dll = DoublyLinkedList(1)
@@ -96,3 +108,38 @@ dll.print_list()
 print("Length:", dll.length)
 print("Head:", dll.head)
 print("Tail:", dll.tail)
+
+# Prepend elements to the list
+dll.prepend(0)
+print("\nList after prepending 0:")
+dll.print_list()
+print("Length:", dll.length)
+print("Head:", dll.head.value if dll.head else None)
+print("Tail:", dll.tail.value if dll.tail else None)
+
+dll.prepend(-1)
+print("\nList after prepending -1:")
+dll.print_list()
+print("Length:", dll.length)
+print("Head:", dll.head.value if dll.head else None)
+print("Tail:", dll.tail.value if dll.tail else None)
+
+# Test prepend on an empty list
+dll.pop()
+dll.pop()
+dll.pop()
+dll.pop()  # Now the list should be empty
+
+print("\nList after clearing all elements (should be empty):")
+dll.print_list()
+print("Length:", dll.length)
+print("Head:", dll.head)
+print("Tail:", dll.tail)
+
+# Prepend to an empty list
+dll.prepend(5)
+print("\nList after prepending 5 to an empty list:")
+dll.print_list()
+print("Length:", dll.length)
+print("Head:", dll.head.value if dll.head else None)
+print("Tail:", dll.tail.value if dll.tail else None)
