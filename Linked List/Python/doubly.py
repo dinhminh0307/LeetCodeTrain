@@ -88,6 +88,14 @@ class DoublyLinkedList:
             if tmp == None:
                 return None
         return tmp
+    
+    def set(self, index, value) -> bool:
+        temp = self.get(index)
+        if temp:
+            temp.value = value
+        else:
+            return False
+        return True
 
         
 
@@ -176,6 +184,45 @@ class DoublyLinkedList:
 
 # Initialize a new list
 # Initialize a new list
+# dll = DoublyLinkedList(10)
+# dll.append(20)
+# dll.append(30)
+# dll.append(40)
+
+# print("Initial list:")
+# dll.print_list()
+# print("Length:", dll.length)
+# print("Head:", dll.head.value if dll.head else None)
+# print("Tail:", dll.tail.value if dll.tail else None)
+
+# # Test get method with various indices
+# print("\nTesting get method:")
+
+# # Get element at index 0 (first element)
+# node = dll.get(0)
+# print("Element at index 0:", node.value if node else None)  # Expected: 10
+
+# # Get element at index 1
+# node = dll.get(1)
+# print("Element at index 1:", node.value if node else None)  # Expected: 20
+
+# # Get element at index 2
+# node = dll.get(2)
+# print("Element at index 2:", node.value if node else None)  # Expected: 30
+
+# # Get element at index 3 (last element)
+# node = dll.get(3)
+# print("Element at index 3:", node.value if node else None)  # Expected: 40
+
+# # Get element at index out of bounds (e.g., 4)
+# node = dll.get(4)
+# print("Element at index 4 (out of bounds):", node.value if node else None)  # Expected: None
+
+# # Get element at index -1 (negative index)
+# node = dll.get(-1)
+# print("Element at index -1 (negative index):", node.value if node else None)  # Expected: None
+
+# Initialize a new list for testing
 dll = DoublyLinkedList(10)
 dll.append(20)
 dll.append(30)
@@ -187,30 +234,30 @@ print("Length:", dll.length)
 print("Head:", dll.head.value if dll.head else None)
 print("Tail:", dll.tail.value if dll.tail else None)
 
-# Test get method with various indices
-print("\nTesting get method:")
+# Test set method with various indices
+print("\nTesting set method:")
 
-# Get element at index 0 (first element)
-node = dll.get(0)
-print("Element at index 0:", node.value if node else None)  # Expected: 10
+# Set element at index 0 (first element)
+result = dll.set(0, 15)
+print("Set index 0 to 15:", "Success" if result else "Failed")
+dll.print_list()  # Expected list: 15 -> 20 -> 30 -> 40
 
-# Get element at index 1
-node = dll.get(1)
-print("Element at index 1:", node.value if node else None)  # Expected: 20
+# Set element at index 2
+result = dll.set(2, 35)
+print("Set index 2 to 35:", "Success" if result else "Failed")
+dll.print_list()  # Expected list: 15 -> 20 -> 35 -> 40
 
-# Get element at index 2
-node = dll.get(2)
-print("Element at index 2:", node.value if node else None)  # Expected: 30
+# Set element at index 3 (last element)
+result = dll.set(3, 45)
+print("Set index 3 to 45:", "Success" if result else "Failed")
+dll.print_list()  # Expected list: 15 -> 20 -> 35 -> 45
 
-# Get element at index 3 (last element)
-node = dll.get(3)
-print("Element at index 3:", node.value if node else None)  # Expected: 40
+# Try to set element at an out-of-bounds index (e.g., 4)
+result = dll.set(4, 50)
+print("Set index 4 to 50 (out of bounds):", "Success" if result else "Failed")
+dll.print_list()  # Expected list (unchanged): 15 -> 20 -> 35 -> 45
 
-# Get element at index out of bounds (e.g., 4)
-node = dll.get(4)
-print("Element at index 4 (out of bounds):", node.value if node else None)  # Expected: None
-
-# Get element at index -1 (negative index)
-node = dll.get(-1)
-print("Element at index -1 (negative index):", node.value if node else None)  # Expected: None
-
+# Try to set element at a negative index (e.g., -1)
+result = dll.set(-1, 5)
+print("Set index -1 to 5 (negative index):", "Success" if result else "Failed")
+dll.print_list()  # Expected list (unchanged): 15 -> 20 -> 35 -> 45
