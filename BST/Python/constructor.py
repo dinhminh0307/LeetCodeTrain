@@ -1,3 +1,7 @@
+from collections import deque
+from typing import List
+
+
 class Node:
     def __init__(self, value) -> None:
         self.value = value
@@ -49,4 +53,32 @@ class BST:
             elif val > temp.value:
                 temp = temp.right
         return False
+    
+    def BFS(self) -> List[int]:
+        queue = deque()
+        res = []
+        if not self.root:
+            return res  # Return empty list if root is None
+        
+        queue.append(self.root)
+        while queue:
+            current_node = queue.popleft()
+            res.append(current_node.value)
             
+            if current_node.left:
+                queue.append(current_node.left)
+            if current_node.right:
+                queue.append(current_node.right)
+        
+        return res
+
+bst = BST()
+bst.insert(10)
+bst.insert(5)
+bst.insert(15)
+bst.insert(2)
+bst.insert(7)
+bst.insert(12)
+bst.insert(17)
+
+print(bst.BFS())  # Expected output in BFS order: [10, 5, 15, 2, 7, 12, 17]
